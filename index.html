@@ -5,151 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Routine Selector</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f0f5;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        .hero img {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 0 0 20px 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            margin-bottom: 20px;
-        }
-
-        .container {
-            max-width: 500px;
-            margin: auto;
-            background: #fff;
-            padding: 30px 25px;
-            border-radius: 15px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-
-        .logo {
-            width: 80px;
-            margin-bottom: 15px;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-        }
-
-        h2 {
-            color: #333;
-            margin-bottom: 25px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input, select, button {
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1em;
-        }
-
-        button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #218838;
-        }
-
-        #result {
-            margin-top: 20px;
-            display: none;
-        }
-
-        #pdfLink {
-            text-decoration: none;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        #pdfLink:hover {
-            background-color: #0056b3;
-        }
-
-        #status {
-            margin-top: 10px;
-            font-weight: 500;
-            color: #444;
-        }
+        /* Your previous styles or new styles go here */
     </style>
 </head>
 <body>
-
-    <!-- Hero Banner -->
-    <div class="hero">
-        <img src="https://images.unsplash.com/photo-1598970434795-0c54fe7c0642" alt="Fitness Motivation">
-    </div>
-
     <div class="container">
-        <!-- Optional Logo -->
-        <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fitness_logo.svg/1200px-Fitness_logo.svg.png" alt="Logo">
-
         <h2>Select Your Workout Routine</h2>
-
         <form id="workoutForm">
             <input type="text" id="name" placeholder="Your Name" required>
             <input type="email" id="email" placeholder="Your Email" required>
-
             <select id="goal" required>
                 <option value="">--Choose Your Goal--</option>
                 <option value="weight_loss">Weight Loss</option>
                 <option value="muscle_gain">Muscle Gain</option>
                 <option value="general_fitness">General Fitness</option>
             </select>
-
             <select id="experience" required>
                 <option value="">--Experience Level--</option>
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
                 <option value="Advanced">Advanced</option>
             </select>
-
-            <select id="daysPerWeek" required>
+             <select id="daysPerWeek" required>
                 <option value="">--Days per Week--</option>
                 <option value="3">3 Days</option>
                 <option value="4">4 Days</option>
                 <option value="5+">5+ Days</option>
             </select>
-
             <select id="workoutType" required>
                 <option value="">--Workout Type--</option>
                 <option value="Bodyweight">Bodyweight</option>
                 <option value="Gym">Gym</option>
                 <option value="Mix">Mix</option>
             </select>
-
             <button type="submit">Get Routine</button>
         </form>
-
-        <div id="result">
+        
+        <div id="result" style="display:none;">
             <h3>Your Routine:</h3>
             <a id="pdfLink" href="#" target="_blank" download>Download Routine PDF</a>
         </div>
-
+        
         <p id="status"></p>
     </div>
-
+    
     <script>
         document.getElementById("workoutForm").addEventListener("submit", function(e) {
             e.preventDefault();
@@ -167,36 +66,36 @@
             let pdfFiles = {
                 "weight_loss": {
                     "Beginner": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1frVPqaJ9Tg_imOp7dkTa-T0jXvHF9Z7FUMvTmtEuXaY",
-                        "Gym": "pdfs/weight_loss_beginner_gym.pdf",
-                        "Mix": "pdfs/weight_loss_beginner_mix.pdf"
+                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1TlEmW5zyTiVAuGOrZXn1E6M-VSlwVcaybCDV8PWdBLE",
+                        "Gym": "https://drive.google.com/uc?export=download&id=1V7AajTw_bxR-fLwR5iIoE11XOL5EuutkwaQSoPfDA54",
+                        "Mix": "https://drive.google.com/uc?export=download&id=1xEe9fuFlGxaVPnIZhdSc0-c3EKxl3Gv9-CQfpmgMDHU"
                     },
                     "Intermediate": {
-                        "Bodyweight": "pdfs/weight_loss_intermediate_bodyweight.pdf",
-                        "Gym": "pdfs/weight_loss_intermediate_gym.pdf",
-                        "Mix": "pdfs/weight_loss_intermediate_mix.pdf"
+                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1Y9lSyBkPoNey50BKL5L0v5qhcY62yipbG5OFcvfYlHc",
+                        "Gym": "https://drive.google.com/uc?export=download&id=14MQIJqjXt5c2rPL2RvokRN5cwIok7I4XQLDcUy3ocEY",
+                        "Mix": "https://drive.google.com/uc?export=download&id=10gUObaVRL78I5AZ2zeXRp9zQaZaDtVuCrG1OmG0ZJCI"
                     },
                     "Advanced": {
-                        "Bodyweight": "pdfs/weight_loss_advanced_bodyweight.pdf",
-                        "Gym": "pdfs/weight_loss_advanced_gym.pdf",
-                        "Mix": "pdfs/weight_loss_advanced_mix.pdf"
+                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1bYz_5usAGiT7wr84p4wyhzr6zG_K8v3ApzbiHweMSZA",
+                        "Gym": "https://drive.google.com/uc?export=download&id=16_uyQO6DhcAZAuCpCoFaOpQc7feky2l1K0HJ27YRDFE",
+                        "Mix": "https://drive.google.com/uc?export=download&id=1ojE06zt-jKqrbF1ikVBUhP04WS_js0LdfbahrrOMw-s"
                     }
                 },
                 "muscle_gain": {
                     "Beginner": {
-                        "Bodyweight": "pdfs/muscle_gain_beginner_bodyweight.pdf",
-                        "Gym": "pdfs/muscle_gain_beginner_gym.pdf",
-                        "Mix": "pdfs/muscle_gain_beginner_mix.pdf"
+                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1stjTckSTYHHIdn2lq30pwNG8srNpdI-iR4bzGtfjq_s",
+                        "Gym": "https://drive.google.com/uc?export=download&id=1ehE2179WheH1S-apUZ48yPIM519802zUhxkXHwYSAqk",
+                        "Mix": "https://drive.google.com/uc?export=download&id=1C0cUEPnVrKT4rSwd0aa1FhGA5642bw5R5yqeiGHANYQ"
                     },
                     "Intermediate": {
-                        "Bodyweight": "pdfs/muscle_gain_intermediate_bodyweight.pdf",
-                        "Gym": "pdfs/muscle_gain_intermediate_gym.pdf",
-                        "Mix": "pdfs/muscle_gain_intermediate_mix.pdf"
+                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1mDgsFX74LQ8lrrh59akcTM2y0ib3fxM0hgC1rwaEdW4",
+                        "Gym": "https://drive.google.com/uc?export=download&id=1VnQAUdW06pU8bdXWdBw9FPaN_hO1cvRKugfBD024AnI",
+                        "Mix": "https://drive.google.com/uc?export=download&id=1-QAT3NUN6JMQETc_aB3-v0WzOof5X0YKeIKPofjhTEY"
                     },
                     "Advanced": {
-                        "Bodyweight": "pdfs/muscle_gain_advanced_bodyweight.pdf",
-                        "Gym": "pdfs/muscle_gain_advanced_gym.pdf",
-                        "Mix": "pdfs/muscle_gain_advanced_mix.pdf"
+                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1ySSvmL1APkTiYyxvErtajn-lY6gcxsq5oqJEIyzaWQg",
+                        "Gym": "https://drive.google.com/uc?export=download&id=1syFsmtU8kd6OwYQYj5Yt1FdiM6T3k8MMDLyQdlooyzc",
+                        "Mix": "https://drive.google.com/uc?export=download&id=1te7mKEUTcUKR1Er7nFXnW7bBd0Qwy8Ls6Vc_qHI6HUE"
                     }
                 }
             };
@@ -216,15 +115,15 @@
                 message: `Hello ${name},\n\nHere is your selected routine PDF:\n${selectedPDF}\n\nBest regards,\nYour Fitness Team`
             };
 
-            // emailjs integration (optional)
+            // Uncomment and configure the email sending if required
             // emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams)
-            // .then(response => {
-            //     statusMsg.innerText = "Routine sent to your email!";
-            // })
-            // .catch(error => {
-            //     statusMsg.innerText = "Failed to send email. Try again.";
-            //     console.error("EmailJS Error:", error);
-            // });
+            //     .then(response => {
+            //         statusMsg.innerText = "Routine sent to your email!";
+            //     })
+            //     .catch(error => {
+            //         statusMsg.innerText = "Failed to send email. Try again.";
+            //         console.error("EmailJS Error:", error);
+            //     });
         });
     </script>
 </body>
