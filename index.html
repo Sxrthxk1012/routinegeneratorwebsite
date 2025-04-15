@@ -109,4 +109,123 @@
 
         <form id="workoutForm">
             <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required
+            <input type="email" id="email" placeholder="Your Email" required>
+
+            <select id="goal" required>
+                <option value="">--Choose Your Goal--</option>
+                <option value="weight_loss">Weight Loss</option>
+                <option value="muscle_gain">Muscle Gain</option>
+                <option value="general_fitness">General Fitness</option>
+            </select>
+
+            <select id="experience" required>
+                <option value="">--Experience Level--</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+
+            <select id="daysPerWeek" required>
+                <option value="">--Days per Week--</option>
+                <option value="3">3 Days</option>
+                <option value="4">4 Days</option>
+                <option value="5+">5+ Days</option>
+            </select>
+
+            <select id="workoutType" required>
+                <option value="">--Workout Type--</option>
+                <option value="Bodyweight">Bodyweight</option>
+                <option value="Gym">Gym</option>
+                <option value="Mix">Mix</option>
+            </select>
+
+            <button type="submit">Get Routine</button>
+        </form>
+
+        <div id="result">
+            <h3>Your Routine:</h3>
+            <a id="pdfLink" href="#" target="_blank" download>Download Routine PDF</a>
+        </div>
+
+        <p id="status"></p>
+    </div>
+
+    <script>
+        document.getElementById("workoutForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let goal = document.getElementById("goal").value;
+            let daysPerWeek = document.getElementById("daysPerWeek").value;
+            let experience = document.getElementById("experience").value;
+            let workoutType = document.getElementById("workoutType").value;
+            let pdfLink = document.getElementById("pdfLink");
+            let resultDiv = document.getElementById("result");
+            let statusMsg = document.getElementById("status");
+
+            let pdfFiles = {
+                "weight_loss": {
+                    "Beginner": {
+                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1frVPqaJ9Tg_imOp7dkTa-T0jXvHF9Z7FUMvTmtEuXaY",
+                        "Gym": "pdfs/weight_loss_beginner_gym.pdf",
+                        "Mix": "pdfs/weight_loss_beginner_mix.pdf"
+                    },
+                    "Intermediate": {
+                        "Bodyweight": "pdfs/weight_loss_intermediate_bodyweight.pdf",
+                        "Gym": "pdfs/weight_loss_intermediate_gym.pdf",
+                        "Mix": "pdfs/weight_loss_intermediate_mix.pdf"
+                    },
+                    "Advanced": {
+                        "Bodyweight": "pdfs/weight_loss_advanced_bodyweight.pdf",
+                        "Gym": "pdfs/weight_loss_advanced_gym.pdf",
+                        "Mix": "pdfs/weight_loss_advanced_mix.pdf"
+                    }
+                },
+                "muscle_gain": {
+                    "Beginner": {
+                        "Bodyweight": "pdfs/muscle_gain_beginner_bodyweight.pdf",
+                        "Gym": "pdfs/muscle_gain_beginner_gym.pdf",
+                        "Mix": "pdfs/muscle_gain_beginner_mix.pdf"
+                    },
+                    "Intermediate": {
+                        "Bodyweight": "pdfs/muscle_gain_intermediate_bodyweight.pdf",
+                        "Gym": "pdfs/muscle_gain_intermediate_gym.pdf",
+                        "Mix": "pdfs/muscle_gain_intermediate_mix.pdf"
+                    },
+                    "Advanced": {
+                        "Bodyweight": "pdfs/muscle_gain_advanced_bodyweight.pdf",
+                        "Gym": "pdfs/muscle_gain_advanced_gym.pdf",
+                        "Mix": "pdfs/muscle_gain_advanced_mix.pdf"
+                    }
+                }
+            };
+
+            let selectedPDF = pdfFiles[goal]?.[experience]?.[workoutType];
+            if (!selectedPDF) {
+                statusMsg.innerText = "No routine available for selected options.";
+                return;
+            }
+
+            pdfLink.href = selectedPDF;
+            resultDiv.style.display = "block";
+
+            let emailParams = {
+                name: name,
+                email: email,
+                message: `Hello ${name},\n\nHere is your selected routine PDF:\n${selectedPDF}\n\nBest regards,\nYour Fitness Team`
+            };
+
+            // emailjs integration (optional)
+            // emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams)
+            // .then(response => {
+            //     statusMsg.innerText = "Routine sent to your email!";
+            // })
+            // .catch(error => {
+            //     statusMsg.innerText = "Failed to send email. Try again.";
+            //     console.error("EmailJS Error:", error);
+            // });
+        });
+    </script>
+</body>
+</html>
