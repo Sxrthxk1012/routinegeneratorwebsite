@@ -5,7 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fitness Routine Selector</title>
     <style>
-        /* Your previous styles or new styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, select, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #status {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -26,7 +90,7 @@
                 <option value="Intermediate">Intermediate</option>
                 <option value="Advanced">Advanced</option>
             </select>
-             <select id="daysPerWeek" required>
+            <select id="daysPerWeek" required>
                 <option value="">--Days per Week--</option>
                 <option value="3">3 Days</option>
                 <option value="4">4 Days</option>
@@ -49,7 +113,11 @@
         <p id="status"></p>
     </div>
     
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
+        // Initialize EmailJS
+        emailjs.init("YOUR_USER_ID");  // Replace with your EmailJS user ID
+
         document.getElementById("workoutForm").addEventListener("submit", function(e) {
             e.preventDefault();
             
@@ -115,15 +183,15 @@
                 message: `Hello ${name},\n\nHere is your selected routine PDF:\n${selectedPDF}\n\nBest regards,\nYour Fitness Team`
             };
 
-            // Uncomment and configure the email sending if required
-            // emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams)
-            //     .then(response => {
-            //         statusMsg.innerText = "Routine sent to your email!";
-            //     })
-            //     .catch(error => {
-            //         statusMsg.innerText = "Failed to send email. Try again.";
-            //         console.error("EmailJS Error:", error);
-            //     });
+            // Send email with EmailJS
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams)
+                .then(response => {
+                    statusMsg.innerText = "Routine sent to your email!";
+                })
+                .catch(error => {
+                    statusMsg.innerText = "Failed to send email. Try again.";
+                    console.error("EmailJS Error:", error);
+                });
         });
     </script>
 </body>
