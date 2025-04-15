@@ -72,41 +72,55 @@
     <div class="container">
         <h2>Select Your Workout Routine</h2>
         <form id="workoutForm">
+            <!-- Name Field -->
             <input type="text" id="name" placeholder="Your Name" required>
+
+            <!-- Email Field -->
             <input type="email" id="email" placeholder="Your Email" required>
+
+            <!-- Goal Dropdown -->
             <select id="goal" required>
                 <option value="">--Choose Your Goal--</option>
                 <option value="weight_loss">Weight Loss</option>
                 <option value="muscle_gain">Muscle Gain</option>
                 <option value="general_fitness">General Fitness</option>
             </select>
+
+            <!-- Experience Level Dropdown -->
             <select id="experience" required>
                 <option value="">--Experience Level--</option>
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
                 <option value="Advanced">Advanced</option>
             </select>
+
+            <!-- Days per Week Dropdown -->
             <select id="daysPerWeek" required>
                 <option value="">--Days per Week--</option>
                 <option value="3">3 Days</option>
                 <option value="4">4 Days</option>
                 <option value="5+">5+ Days</option>
             </select>
+
+            <!-- Workout Type Dropdown -->
             <select id="workoutType" required>
                 <option value="">--Workout Type--</option>
                 <option value="Bodyweight">Bodyweight</option>
                 <option value="Gym">Gym</option>
                 <option value="Mix">Mix</option>
             </select>
+
+            <!-- Submit Button -->
             <button type="submit">Get Routine</button>
         </form>
         
+        <!-- Result Section -->
         <div id="result" style="display:none;">
             <h3>Your Routine:</h3>
             <a id="pdfLink" href="#" target="_blank" download>Download Routine PDF</a>
         </div>
     </div>
-    
+
     <script>
         document.getElementById("workoutForm").addEventListener("submit", function(e) {
             e.preventDefault();
@@ -176,7 +190,7 @@
         });
 
         function sendToGoogleSheets(formData) {
-            const scriptUrl = "https://script.google.com/macros/s/AKfycbzF0JZDGB1HhBhvSow2mxf8BwXk-5Hst0kzmD9wKqte8rsT_6tL/exec"; // Replace with your Apps Script URL
+            const scriptUrl = "https://script.google.com/macros/s/AKfycbxPq9IGnj8pNiL6K2TJk5vJpJeOHW3_VbjD7R56WCAa63YdHV9H_WEkeoZnGmK0IWLXEA/exec"; // Replace with your Apps Script URL
 
             fetch(scriptUrl, {
                 method: "POST",
