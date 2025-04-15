@@ -6,77 +6,128 @@
     <title>Fitness Routine Selector</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #2C3E50;
-            color: white;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2F80ED, #56CCF2);
+            color: #fff;
             margin: 0;
             padding: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
+
         .container {
-            max-width: 600px;
-            background-color: #34495E;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 20px;
+            padding: 40px 50px;
             width: 100%;
+            max-width: 600px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
         }
+
+        .container:hover {
+            transform: translateY(-10px);
+        }
+
         h2 {
             text-align: center;
             color: #ECF0F1;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
         }
+
         form {
             display: flex;
             flex-direction: column;
+            gap: 20px;
         }
+
         input, select, button {
-            width: 100%;
             padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #BDC3C7;
-            border-radius: 5px;
-            background-color: #2C3E50;
-            color: white;
+            border-radius: 10px;
+            border: 2px solid #3498db;
+            font-size: 1rem;
+            color: #fff;
+            background-color: #34495E;
+            transition: all 0.3s ease;
         }
+
+        input:focus, select:focus {
+            border-color: #1abc9c;
+            outline: none;
+            background-color: #2C3E50;
+        }
+
         button {
             background-color: #28A745;
             cursor: pointer;
-            transition: background-color 0.3s;
+            color: white;
+            border: none;
+            transition: background-color 0.3s ease;
         }
+
         button:hover {
             background-color: #218838;
         }
-        #result {
-            margin-top: 20px;
+
+        select {
+            background-color: #2C3E50;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .result-container {
             display: none;
             text-align: center;
+            margin-top: 30px;
+            font-size: 1.2rem;
         }
+
         #pdfLink {
             text-decoration: none;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
+            background-color: #2980b9;
+            padding: 10px 20px;
+            border-radius: 10px;
             margin-top: 10px;
+            display: inline-block;
         }
+
         #pdfLink:hover {
-            background-color: #0056b3;
+            background-color: #3498db;
+        }
+
+        /* Animation for loading spinner */
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 2s linear infinite;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <h2>Select Your Workout Routine</h2>
+        <h2>Get Your Custom Workout Plan</h2>
+
         <form id="workoutForm">
             <!-- Name Field -->
-            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="text" id="name" placeholder="Enter Your Name" required>
 
             <!-- Email Field -->
-            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="email" id="email" placeholder="Enter Your Email" required>
 
             <!-- Goal Dropdown -->
             <select id="goal" required>
@@ -94,14 +145,6 @@
                 <option value="Advanced">Advanced</option>
             </select>
 
-            <!-- Days per Week Dropdown -->
-            <select id="daysPerWeek" required>
-                <option value="">--Days per Week--</option>
-                <option value="3">3 Days</option>
-                <option value="4">4 Days</option>
-                <option value="5+">5+ Days</option>
-            </select>
-
             <!-- Workout Type Dropdown -->
             <select id="workoutType" required>
                 <option value="">--Workout Type--</option>
@@ -110,21 +153,33 @@
                 <option value="Mix">Mix</option>
             </select>
 
+            <!-- Days per Week Dropdown -->
+            <select id="daysPerWeek" required>
+                <option value="">--Days per Week--</option>
+                <option value="3">3 Days</option>
+                <option value="4">4 Days</option>
+                <option value="5+">5+ Days</option>
+            </select>
+
             <!-- Submit Button -->
             <button type="submit">Get Routine</button>
         </form>
-        
+
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="spinner" style="display: none;"></div>
+
         <!-- Result Section -->
-        <div id="result" style="display:none;">
-            <h3>Your Routine:</h3>
-            <a id="pdfLink" href="#" target="_blank" download>Download Routine PDF</a>
+        <div id="result" class="result-container">
+            <h3>Your Routine is Ready!</h3>
+            <a id="pdfLink" href="#" target="_blank" download>Download Your Routine PDF</a>
         </div>
     </div>
 
     <script>
         document.getElementById("workoutForm").addEventListener("submit", function(e) {
             e.preventDefault();
-            
+            document.getElementById("loadingSpinner").style.display = "block";
+
             let goal = document.getElementById("goal").value;
             let experience = document.getElementById("experience").value;
             let workoutType = document.getElementById("workoutType").value;
@@ -148,24 +203,8 @@
                         "Gym": "https://drive.google.com/uc?export=download&id=1ilZX_MmiGTBdNU9Fl8Do0sdtDJ_wOnZv",
                         "Mix": "https://drive.google.com/uc?export=download&id=1X_oIwsjbCOw5mjRzLNoxMO2GR9Aa9q7_"
                     }
-                },
-                "muscle_gain": {
-                    "Beginner": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1qXe81L6XOVzLybPikYj7kZjXq9cUV_dg",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1hxh4AqdlxJmx2oD2Qv4WxkpFSf0ntDlH",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1BDXzv9q_zVp4gQd-V8EKGRrhVkjkfz7d"
-                    },
-                    "Intermediate": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1gwJ6t61BxDK4P_5O-w4T5xk11FjcfWJ5",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1xcz-rZAf4a5n0cZsjLtVrx3GFwFbTY3t",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1lFCZ1y5gKkZcqnfuRgu5kFpo5dFz7yFU"
-                    },
-                    "Advanced": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1x8efF6Vn1Xn88u_vjt9O2-qkq7CzoSvn",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1a5KHlrbF5hQJ0LDL5ojZke2CUAZHeIaB",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1R8O9bHD6GmZXeQPL1UqfHxoXtW6PQmhg"
-                    }
                 }
+                // Add additional data for other goals here as needed
             };
 
             let selectedPDF = pdfFiles[goal]?.[experience]?.[workoutType];
@@ -176,7 +215,8 @@
 
             pdfLink.href = selectedPDF;
             resultDiv.style.display = "block";
-            
+            document.getElementById("loadingSpinner").style.display = "none";
+
             // Send form data to Google Sheets
             const formData = {
                 name: document.getElementById("name").value,
