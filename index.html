@@ -6,75 +6,125 @@
     <title>Fitness Routine Selector</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c3e50;
+            color: #fff;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://www.w3schools.com/w3images/gym.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         .container {
+            background-color: rgba(0, 0, 0, 0.7);
             width: 80%;
             max-width: 800px;
-            margin: 50px auto;
-            background-color: #fff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
         h2 {
             text-align: center;
-            color: #333;
+            font-size: 36px;
+            color: #ecf0f1;
+            margin-bottom: 20px;
+            font-weight: bold;
         }
 
         form {
             display: flex;
             flex-direction: column;
+            gap: 15px;
         }
 
         input, select, button {
-            margin: 10px 0;
-            padding: 10px;
+            padding: 15px;
             font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border-radius: 6px;
+            border: 1px solid #34495e;
+            outline: none;
+        }
+
+        input, select {
+            background-color: #34495e;
+            color: #fff;
         }
 
         button {
-            background-color: #4CAF50;
+            background-color: #27ae60;
             color: white;
             cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #2ecc71;
         }
 
         #result {
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
+        }
+
+        #pdfLink {
+            font-size: 18px;
+            font-weight: bold;
+            color: #27ae60;
+            text-decoration: none;
+            border: 2px solid #27ae60;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        #pdfLink:hover {
+            background-color: #27ae60;
+            color: #fff;
         }
 
         #status {
-            text-align: center;
             margin-top: 20px;
-            color: #333;
+            text-align: center;
+            color: #ecf0f1;
+            font-size: 18px;
         }
 
-        a {
-            color: #4CAF50;
-            text-decoration: none;
-            font-weight: bold;
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .social-button {
+            background-color: #3498db;
+            padding: 12px;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .social-button:hover {
+            background-color: #2980b9;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Select Your Workout Routine</h2>
+        <h2>Choose Your Fitness Routine</h2>
         <form id="workoutForm">
             <input type="text" id="name" placeholder="Your Name" required>
             <input type="email" id="email" placeholder="Your Email" required>
@@ -102,17 +152,29 @@
                 <option value="Gym">Gym</option>
                 <option value="Mix">Mix</option>
             </select>
-            <button type="submit">Get Routine</button>
+            <button type="submit">Get My Routine</button>
         </form>
-        
+
         <div id="result" style="display:none;">
-            <h3>Your Routine:</h3>
+            <h3>Your Fitness Routine:</h3>
             <a id="pdfLink" href="#" target="_blank" download>Download Routine PDF</a>
         </div>
         
         <p id="status"></p>
+
+        <div class="social-buttons">
+            <div class="social-button">
+                <a href="https://facebook.com" target="_blank" style="color: white;">F</a>
+            </div>
+            <div class="social-button">
+                <a href="https://twitter.com" target="_blank" style="color: white;">T</a>
+            </div>
+            <div class="social-button">
+                <a href="https://instagram.com" target="_blank" style="color: white;">I</a>
+            </div>
+        </div>
     </div>
-    
+
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         // Initialize EmailJS
@@ -180,19 +242,4 @@
             let emailParams = {
                 name: name,
                 email: email,
-                message: `Hello ${name},\n\nHere is your selected routine PDF:\n${selectedPDF}\n\nBest regards,\nYour Fitness Team`
-            };
-
-            // Send email with EmailJS
-            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", emailParams)
-                .then(response => {
-                    statusMsg.innerText = "Routine sent to your email!";
-                })
-                .catch(error => {
-                    statusMsg.innerText = "Failed to send email. Try again.";
-                    console.error("EmailJS Error:", error);
-                });
-        });
-    </script>
-</body>
-</html>
+                message: `Hello ${name
