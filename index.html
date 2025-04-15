@@ -1,168 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitness Routine Selector</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #2C3E50;
-            color: white;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            max-width: 600px;
-            background-color: #34495E;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            width: 100%;
-        }
-        h2 {
-            text-align: center;
-            color: #ECF0F1;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid #BDC3C7;
-            border-radius: 5px;
-            background-color: #2C3E50;
-            color: white;
-        }
-        button {
-            background-color: #28A745;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        button:hover {
-            background-color: #218838;
-        }
-        #result {
-            margin-top: 20px;
-            display: none;
-            text-align: center;
-        }
-        #pdfLink {
-            text-decoration: none;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-        #pdfLink:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fitness Coaching</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: #111;
+      color: #f1f1f1;
+      line-height: 1.6;
+    }
+    header {
+      background: #0f0f0f;
+      padding: 20px 40px;
+      text-align: center;
+      border-bottom: 2px solid #0ff;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      color: #0ff;
+    }
+    nav ul {
+      list-style: none;
+      margin-top: 10px;
+    }
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #f1f1f1;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      padding: 80px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, #0ff 0%, #00f 100%);
+      color: #000;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .section {
+      padding: 60px 40px;
+    }
+    .testimonials {
+      background: #1a1a1a;
+    }
+    .testimonial {
+      background: #222;
+      padding: 20px;
+      border-left: 5px solid #0ff;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    form {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: auto;
+      margin-top: 30px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: #333;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+    }
+    button {
+      background: #0ff;
+      color: #000;
+      padding: 12px 20px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #00e6e6;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #0f0f0f;
+      border-top: 1px solid #0ff;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Select Your Workout Routine</h2>
-        <form id="workoutForm">
-            <input type="text" id="name" placeholder="Your Name" required>
-            <input type="email" id="email" placeholder="Your Email" required>
-            <select id="goal" required>
-                <option value="">--Choose Your Goal--</option>
-                <option value="weight_loss">Weight Loss</option>
-                <option value="muscle_gain">Muscle Gain</option>
-                <option value="general_fitness">General Fitness</option>
-            </select>
-            <select id="experience" required>
-                <option value="">--Experience Level--</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-            </select>
-            <select id="daysPerWeek" required>
-                <option value="">--Days per Week--</option>
-                <option value="3">3 Days</option>
-                <option value="4">4 Days</option>
-                <option value="5+">5+ Days</option>
-            </select>
-            <select id="workoutType" required>
-                <option value="">--Workout Type--</option>
-                <option value="Bodyweight">Bodyweight</option>
-                <option value="Gym">Gym</option>
-                <option value="Mix">Mix</option>
-            </select>
-            <button type="submit">Get Routine</button>
-        </form>
-        
-        <div id="result" style="display:none;">
-            <h3>Your Routine:</h3>
-            <a id="pdfLink" href="#" target="_blank" download>Download Routine PDF</a>
-        </div>
+
+  <header>
+    <h1>Fitness Coaching</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#form">Join Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Your Journey to Fitness Starts Here</h2>
+    <p>Customized training and nutrition plans tailored to your goals.</p>
+  </section>
+
+  <section id="testimonials" class="section testimonials">
+    <h2 style="text-align:center; margin-bottom:30px;">💬 Testimonials</h2>
+    <div class="testimonial">
+      <p>“I started this program with zero experience, and now I feel stronger, healthier, and more confident than ever!”</p>
+      <small>- Aisha, Beginner</small>
     </div>
-    
-    <script>
-        document.getElementById("workoutForm").addEventListener("submit", function(e) {
-            e.preventDefault();
-            
-            let goal = document.getElementById("goal").value;
-            let experience = document.getElementById("experience").value;
-            let workoutType = document.getElementById("workoutType").value;
-            let pdfLink = document.getElementById("pdfLink");
-            let resultDiv = document.getElementById("result");
+    <div class="testimonial">
+      <p>“The routines are simple yet super effective. The bodyweight exercises alone got me in the best shape of my life.”</p>
+      <small>- Rohit, Home Workout Enthusiast</small>
+    </div>
+    <div class="testimonial">
+      <p>“I loved how the diet and workouts were aligned. This plan is 🔥!”</p>
+      <small>- Karan, Transformation Journey</small>
+    </div>
+  </section>
 
-            let pdfFiles = {
-                "weight_loss": {
-                    "Beginner": {
-                        "Bodyweight": "https://docs.google.com/document/d/1TlEmW5zyTiVAuGOrZXn1E6M-VSlwVcaybCDV8PWdBLE/edit?tab=t.0#heading=h.byd6wqufw60n",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1XoBoP43q0FJ6V6ztKl5HGiEKxZgAfT-8",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1uAGuFVVj1vS8Lt9j5RHskSfp9rxl0iW9"
-                    },
-                    "Intermediate": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1fLO1ITl4qql8u8owzH7u7qgqgK0V59hd",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1ZwKdxj8ol5GzztH79y1fh13yyl2qmnwr",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1kYo9HiFiIzYjszHjWiE-LU0HeA7XaOxQ"
-                    },
-                    "Advanced": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1q8fQZX2Ws63nIEv_4lRfxu5mmY87vZk3",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1ilZX_MmiGTBdNU9Fl8Do0sdtDJ_wOnZv",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1X_oIwsjbCOw5mjRzLNoxMO2GR9Aa9q7_"
-                    }
-                },
-                "muscle_gain": {
-                    "Beginner": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1qXe81L6XOVzLybPikYj7kZjXq9cUV_dg",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1hxh4AqdlxJmx2oD2Qv4WxkpFSf0ntDlH",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1BDXzv9q_zVp4gQd-V8EKGRrhVkjkfz7d"
-                    },
-                    "Intermediate": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1gwJ6t61BxDK4P_5O-w4T5xk11FjcfWJ5",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1xcz-rZAf4a5n0cZsjLtVrx3GFwFbTY3t",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1lFCZ1y5gKkZcqnfuRgu5kFpo5dFz7yFU"
-                    },
-                    "Advanced": {
-                        "Bodyweight": "https://drive.google.com/uc?export=download&id=1x8efF6Vn1Xn88u_vjt9O2-qkq7CzoSvn",
-                        "Gym": "https://drive.google.com/uc?export=download&id=1a5KHlrbF5hQJ0LDL5ojZke2CUAZHeIaB",
-                        "Mix": "https://drive.google.com/uc?export=download&id=1R8O9bHD6GmZXeQPL1UqfHxoXtW6PQmhg"
-                    }
-                }
-            };
+  <section id="form" class="section">
+    <h2 style="text-align:center;">📋 Join the Fitness Fam</h2>
+    <form id="fitness-form">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <input type="text" name="goal" placeholder="Your Fitness Goal" required />
+      <textarea name="message" placeholder="Any message or question?"></textarea>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
 
-            let selectedPDF = pdfFiles[goal]?.[experience]?.[workoutType];
-            if (!selectedPDF) {
-                alert("No routine available for selected options.");
-                return;
-            }
+  <footer>
+    <p>&copy; 2024 Fitness Coaching. All Rights Reserved.</p>
+  </footer>
 
-            pdfLink.href = selectedPDF;
-            resultDiv.style.display = "block";
-        });
-    </script>
+  <script>
+    document.getElementById("fitness-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        goal: form.goal.value,
+        message: form.message.value,
+      };
+
+      fetch("YOUR_GOOGLE_APPS_SCRIPT_URL", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(res => res.json())
+      .then(response => {
+        alert("✅ Form submitted successfully!");
+        form.reset();
+      })
+      .catch(error => {
+        alert("❌ Something went wrong. Please try again.");
+        console.error(error);
+      });
+    });
+  </script>
 </body>
 </html>
